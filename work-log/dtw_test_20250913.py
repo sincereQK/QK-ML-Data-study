@@ -1,3 +1,5 @@
+# 이 코드는 실행시 에러가 발생하고있는 코드입니다.
+
 import yfinance as yf
 import numpy as np
 import stumpy
@@ -88,4 +90,5 @@ axs[2].plot(historical_outcome, label=f'과거 패턴 이후 {future_days}일', 
 axs[2].legend()
 
 plt.tight_layout()
+
 plt.show()
