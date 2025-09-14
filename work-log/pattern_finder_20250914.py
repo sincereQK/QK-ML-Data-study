@@ -6,9 +6,7 @@ from fastdtw import fastdtw
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# ❗️❗️❗️ 문제 해결 1: 한글 폰트 설정 ❗️❗️❗️
-# 코드 상단에 이 부분을 추가하여 matplotlib이 한글을 지원하도록 설정합니다.
-# 사용자의 OS에 맞는 폰트를 선택하세요.
+
 # Windows: 'Malgun Gothic', Mac: 'AppleGothic'
 plt.rcParams['font.family'] = 'Malgun Gothic'
 plt.rcParams['axes.unicode_minus'] = False # 마이너스 부호 깨짐 방지
@@ -36,8 +34,6 @@ else:
 
 # --- 2. 매트릭스 프로파일 계산 ---
 print("\n매트릭스 프로파일 계산 중...")
-# ❗️❗️❗️ 문제 해결 2: stumpy 경고 해결 및 안정성 추가 ❗️❗️❗️
-# ignore_trivial=True 옵션을 추가하여 불필요한 계산을 줄이고 안정성을 높입니다.
 matrix_profile = stumpy.stump(prices.flatten(), m=window_size, ignore_trivial=True)
 
 
@@ -69,7 +65,6 @@ axs[0].set_title(f"'{ticker}' 전체 주가 및 탐색된 주요 패턴", fontsi
 axs[0].plot(prices_series.index, prices, color='gray', alpha=0.7, label='전체 종가 (노이즈 포함)')
 axs[0].plot(prices_series.index[motif_index : motif_index + window_size], historical_motif, color='red', linewidth=2.5, label=f'패턴 1 (인덱스: {motif_index})')
 
-# ❗️❗️❗️ 문제 해결 3: 잘못된 인덱스 접근 방지 ❗️❗️❗️
 # neighbor_index가 데이터 범위를 벗어나는 경우를 대비한 방어 코드
 if neighbor_index < len(prices) - window_size:
     axs[0].plot(prices_series.index[neighbor_index : neighbor_index + window_size], prices[neighbor_index : neighbor_index + window_size], color='blue', linewidth=2.5, label=f'패턴 2 (인덱스: {neighbor_index})')
@@ -87,3 +82,4 @@ axs[2].legend()
 
 plt.tight_layout()
 plt.show()
+
